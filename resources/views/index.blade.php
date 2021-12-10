@@ -501,20 +501,29 @@
     <div class="container">
         <div class="row justify-content-end py-5">
         <div class="col-lg-4 col-md-6">
-            <form class="bg-white p-3 border rounded">
-            <h3>Lorem ipsum</h3>
-            <p>Post-ironic portland shabby chic echo park, banjo fashion axe
-            </p>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="Email" class="form-control" id="email">
-            </div>
-            <div class="form-group">
-                <label class="form-check-label" for="message">Check me out</label>
-                <textarea id="message" class="form-control"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Submit</button>
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <form class="bg-white p-3 border rounded" action="{{asset('/contact')}}" method="POST">
+                @csrf
+                <h3>聯絡我們</h3>
+                <p>快來聯絡我們~
+                </p>
+                <div class="form-group">
+                    <label for="name">姓名</label>
+                    <input type="text" class="form-control" name="name" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="phone">電話</label>
+                    <input type="text" class="form-control"  name="phone" id="phone">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control"  name="email" id="email">
+                </div>
+                <div class="form-group">
+                    <label class="form-check-label" for="content">表單</label>
+                    <textarea id="content" name="content" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                <small id="emailHelp" class="form-text text-muted">送出有驚人小禮物唷</small>
             </form>
         </div>
         </div>
