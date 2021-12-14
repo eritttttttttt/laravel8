@@ -27,9 +27,11 @@ class FrontController extends Controller
     
     public function newsContent($id)
     {
+ 
         // 方法一:  find 會給 collect 
         // $newsDetail = DB::table('news')->find($id);
         $newsDetail = News::find($id);
+        dd($newsDetail);
         // 方法二: where -> get 會給 array
         // $news = DB::table('news')->where('id',$id)->get();
 

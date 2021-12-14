@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+// 前臺
 
 Route::get('/', [FrontController::class, 'index']);
 
@@ -30,3 +33,17 @@ Route::post('/contact', [FrontController::class, 'contact']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+// 後臺
+
+Route::prefix('/admin')->group(function () {
+  // news 
+  Route::prefix('/news')->group(function(){
+    Route::get('/', [NewsController::class, 'index']);
+
+  });
+
+
+});

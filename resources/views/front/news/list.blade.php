@@ -23,6 +23,7 @@
           <div class="card-body">
             <button class="btn btn-primary rounded-0 mb-3"> 最新消息 </button>
             <a href="{{ url('news', ['id'=> $new->id]) }}">
+            {{-- <a href="{{ asset('/news/'. $new->id) }}"> --}}
               <h5 class="card-title">{{ $new->title }}</h5>
             </a>
             <h6 class="text-danger">{{ $new->date }}</h6>

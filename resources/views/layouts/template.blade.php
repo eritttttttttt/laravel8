@@ -47,7 +47,8 @@
             <div class="dropdown">
               <a class="nav-link h3" data-toggle="dropdown" href="#"><i class="fas fa-user-circle"></i></a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="./login.html">Login</a>
+                {{-- <a class="dropdown-item" href="./login.html">Login</a> --}}
+                <a class="dropdown-item" href="{{ asset('/login')}}">Login</a>
               </div>
             </div>
           </li>
