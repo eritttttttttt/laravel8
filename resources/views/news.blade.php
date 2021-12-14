@@ -12,6 +12,7 @@
     <div>目前頁次：<span class="text-danger">1</span></div>
   </div>
   <hr>
+  <a href="{{asset('/create-news')}}" class="btn btn-warning">新增新聞</a>
   <ul>
     @foreach ($news as $new)
       <li class="card flex-md-row mb-3">
@@ -26,6 +27,7 @@
             </a>
             <h6 class="text-danger">{{ $new->date }}</h6>
             <p class="card-text">{{ $new->content }}</p>
+            <a class="btn btn-danger" href="{{ url('destroy-news', ['id'=> $new->id])}}"> 刪除消息</a>
           </div>
         </div>
       </li>

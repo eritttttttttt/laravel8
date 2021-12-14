@@ -31,7 +31,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto align-items-center">
           <li class="nav-item mr-2">
-            <a class="nav-link btn btn-outline-light border-0 py-3 px-4 rounded-lg" href="#">Blog</span></a>
+            <a class="nav-link btn btn-outline-light border-0 py-3 px-4 rounded-lg" href="{{asset('/news')}}">News</span></a>
           </li>
           <li class="nav-item mr-2">
             <a class="nav-link btn btn-outline-light border-0 py-3 px-4 rounded-lg" href="#">Portfolio</span></a>

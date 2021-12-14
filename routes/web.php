@@ -24,7 +24,8 @@ Route::get('/hello/{id}', [FrontController::class, 'hello']);
 Route::get('/news', [FrontController::class, 'news']);
 Route::get('/news/{id}', [FrontController::class, 'newsDetail' ]);
 
-Route::get('/create-news', [FrontController::class, 'createNews']);
+Route::get('/create-news', [FrontController::class, 'createNewsIndex']);
+Route::post('/store-news', [FrontController::class, 'storeNews']);
 Route::get('/update-news/{id}', [FrontController::class, 'updateNews']);
 Route::get('/destroy-news/{id}', [FrontController::class, 'destroyNews']);
 
@@ -33,3 +34,7 @@ Route::get('/destroy-news/{id}', [FrontController::class, 'destroyNews']);
 Route::post('/contact', [FrontController::class, 'contact']);
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

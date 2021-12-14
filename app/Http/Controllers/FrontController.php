@@ -13,7 +13,7 @@ class FrontController extends Controller
     //
     public function index()
     {
-        return view('index');
+        return view('welcome');
     }
 
     public function hello($id)
@@ -41,29 +41,24 @@ class FrontController extends Controller
 
         // 延伸 first 是會只有一筆 -> 
         // $newsDetail = DB::table('news')->where('id',$id)->first();
-        
 
         return view('news-page', compact('newsDetail'));
     }
-    public function createNews(){
-        // $news = DB::table('news')->insert([
-        // C
-        News::create([
-            'title'=>'title',
-            'date'=>'2021-01-01',
-            'content'=>'aaaaaaaaaaaaaaaaaaaaaaaa',
-            'image_url' => '123'
-        ]);
 
-        // update
-        // $news = News::find(2);
-        // $news->title = $news->title . '123';
-        // $news->content = $news->content . '123';
-        // $news->image_url ='123';
-        // $news->push();
-        
+    public function createNewsIndex()
+    {
+        return view('news-create');
+    }
 
-        return 'create';
+    public function storeNews(Request $request){
+        // News::create([
+        //     'title'=> $request->title ,
+        //     'date'=> $request->date ,
+        //     'content'=> $request->content ,
+        //     'image_url' => $request->image_url  
+        // ]);
+        News::create($request->all());
+        return redirect('/news');
     }
 
     public function updateNews($id)
@@ -81,7 +76,6 @@ class FrontController extends Controller
             'content'=>'aaaaaaaaaaaaaaaaaaaaaaaa',
             'image_url' => '123'
         ]);
-
         return 'update';
     }
 
@@ -89,7 +83,7 @@ class FrontController extends Controller
     {
         News::find($id)->delete();
 
-        return 'deleteNews';
+        return redirect('/news');
     }
 
 
