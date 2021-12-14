@@ -14,25 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('index');
-// });
 
-// Route::get('/', 'FrontController@index');
 Route::get('/', [FrontController::class, 'index']);
-Route::get('/hello/{id}', [FrontController::class, 'hello']);
-Route::get('/news', [FrontController::class, 'news']);
-Route::get('/news/{id}', [FrontController::class, 'newsDetail' ]);
 
-Route::get('/create-news', [FrontController::class, 'createNewsIndex']);
-Route::post('/store-news', [FrontController::class, 'storeNews']);
-Route::get('/update-news/{id}', [FrontController::class, 'updateNews']);
-Route::get('/destroy-news/{id}', [FrontController::class, 'destroyNews']);
 
+Route::prefix('news')->group(function () {
+  Route::get('/', [FrontController::class, 'newsList']);
+  Route::get('/{id}', [FrontController::class, 'newsContent']);
+});
 
 
 Route::post('/contact', [FrontController::class, 'contact']);
-
 
 
 Auth::routes();
