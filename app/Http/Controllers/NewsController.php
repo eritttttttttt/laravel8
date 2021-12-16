@@ -12,4 +12,41 @@ class NewsController extends Controller
         $news = News::get();
         return view('admin.news.index', compact('news'));
     }
+
+    public function create()
+    {   
+        return view('admin.news.create');
+    }
+    public function store(Request $request)
+    {   
+        News::create(
+            $request->all()
+        );
+        return redirect()->route('news.index');
+    }
+
+    public function edit($id, Request $request)
+    {   
+        $news =  News::find($id);
+        return view('admin.news.edit', compact('news'));
+    }
+
+
+    public function update($id, Request $request)
+    {   
+        var_dump($id . 'id');
+        News::find($id)->update($request->all());
+        return redirect()->route('news.index');
+    }
+
+
+
+    public function destroy($id)
+    {   
+        News::find($id)->delete();
+    
+        return redirect()->route('news.index');
+    }
+
+
 }
