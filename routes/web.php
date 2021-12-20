@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\NewsController;
 use Illuminate\Support\Facades\Route;
@@ -38,7 +39,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // 後臺
 
-Route::prefix('/admin')->group(function () {
+Route::prefix('/admin')->middleware(['auth'])->group(function () {
   // news 
   Route::prefix('/news')->group(function(){
     Route::get('/', [NewsController::class, 'index'])->name('news.index');
@@ -47,10 +48,21 @@ Route::prefix('/admin')->group(function () {
     Route::get('/{id}/edit', [NewsController::class, 'edit'])->name('news.edit');
     Route::patch('/{id}', [NewsController::class, 'update'])->name('news.update');
 
-    Route::post('/{id}', [NewsController::class, 'show'])->name('news.show');
+    // Route::post('/{id}', [NewsController::class, 'show'])->name('news.show');
     Route::delete('/{id}', [NewsController::class, 'destroy'])->name('news.destroy');
-
+    
   });
 
+  Route::prefix('facility')->group(function(){
+    
+    Route::get('/', [FacilityController::class, 'index'])->name('facility.index');
+    Route::get('/create', [FacilityController::class, 'create'])->name('facility.create');
+    Route::post('/', [FacilityController::class, 'store'])->name('facility.store');
+    Route::get('/{id}/edit', [FacilityController::class, 'edit'])->name('facility.edit');
+    
+    Route::patch('/{id}', [FacilityController::class, 'update'])->name('facility.update');
 
+    Route::delete('/{id}', [FacilityController::class, 'destroy'])->name('facility.destroy');
+
+  });
 });
