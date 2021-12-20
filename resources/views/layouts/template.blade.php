@@ -34,7 +34,9 @@
             <a class="nav-link btn btn-outline-light border-0 py-3 px-4 rounded-lg" href="{{asset('/news')}}">News</span></a>
           </li>
           <li class="nav-item mr-2">
-            <a class="nav-link btn btn-outline-light border-0 py-3 px-4 rounded-lg" href="#">Portfolio</span></a>
+            <a class="nav-link btn btn-outline-light border-0 py-3 px-4 rounded-lg" 
+              href="{{ route('facility') }}"><span>設施</span>
+            </a>
           </li>
           <li class="nav-item mr-2">
             <a class="nav-link btn btn-outline-light border-0 py-3 px-4 rounded-lg" href="#">About</span></a>

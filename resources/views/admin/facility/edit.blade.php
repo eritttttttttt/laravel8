@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.css" />
 
 @endsection
 
@@ -67,10 +68,12 @@
 @endsection
 
 @section('js')
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' integrity='sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==' crossorigin='anonymous'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.js"></script>
 
 <script>
-    
+    $(document).ready(function() {
+        $('#content').summernote();
+    });
     $('#image_url').on('change',function(){
         if(this.files && this.files[0]){
             const  fr = new FileReader();

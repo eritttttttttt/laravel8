@@ -82,6 +82,7 @@ class FacilityController extends Controller
     {
         // 是否圖片為空 
         $hasNewImage = is_null( $request->image_url );
+        // $hasNewImage = $request->hasFile('image_url');
         $image = Facility::find($id)->image_url;
 
         if(!$hasNewImage){
@@ -110,7 +111,14 @@ class FacilityController extends Controller
      */
     public function destroy($id)
     {
-        Facility::find($id)->delete();
+        // 找到資料
+        $facility =Facility::find($id);
+        // 找到圖片位子 刪除圖片
+        Storage::delete($facility->image_url);
+        // 刪除資料
+        $facility->delete();
+
+        // 
         return redirect()->route('facility.index');
     }
 }

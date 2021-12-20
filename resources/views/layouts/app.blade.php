@@ -20,6 +20,7 @@
 </head>
 <body>
     <div id="app">
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -35,10 +36,27 @@
                         @guest
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ asset('/admin/news') }}"> 最新消息管理 </a>
+                                <a class="nav-link
+                                    @if( url()->current() === asset('/admin/news'))
+                                        'bg-primary'
+                                    @endif
+                                
+                                " href="{{ asset('/admin/news') }}"> 最新消息管理 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('facility.index') }}"> 最新設施管理 </a>
+                                <a class="nav-link {{(Route::currentRouteName() === 'facility.index' ? 'bg-primary' : 'bg-danger')}}" href="{{ route('facility.index') }}">
+                                    {{Route::currentRouteName() === 'facility.index' ? 'bg-primary' : ''}}
+                                    
+                                    最新設施管理 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link
+                                @if( Route::currentRouteName() === 'contact.index')
+                                    bg-primary
+                                @else
+                                    bg-danger
+                                @endif
+                                " href="{{ route('contact.index') }}"> 聯絡我們管理 </a>
                             </li>
                         @endguest
                     </ul>
@@ -90,6 +108,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js' ></script>
+
     @yield('js')
 </body>
 </html>

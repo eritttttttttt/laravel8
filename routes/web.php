@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ToolBoxController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 
 
 // 前臺
-
 Route::get('/', [FrontController::class, 'index']);
 
 
@@ -29,6 +30,7 @@ Route::prefix('news')->group(function () {
 
 
 Route::post('/contact', [FrontController::class, 'contact']);
+Route::get('/facility', [FrontController::class, 'facility'])->name('facility');
 
 
 Auth::routes();
@@ -53,7 +55,7 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     
   });
 
-  Route::prefix('facility')->group(function(){
+  Route::prefix('/facility')->group(function(){
     
     Route::get('/', [FacilityController::class, 'index'])->name('facility.index');
     Route::get('/create', [FacilityController::class, 'create'])->name('facility.create');
@@ -65,4 +67,10 @@ Route::prefix('/admin')->middleware(['auth'])->group(function () {
     Route::delete('/{id}', [FacilityController::class, 'destroy'])->name('facility.destroy');
 
   });
+  Route::prefix('/contact')->group(function(){
+    Route::get('/', [ContactController::class, 'index'])->name('contact.index');
+    Route::delete('/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+  });
 });
+
+Route::post('/image-upload', [ToolBoxController::class, 'imageUpload'])->name('tool.image_upload');

@@ -1,6 +1,12 @@
 @extends('layouts.app')
 @section('css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.css" />
+<style>
+    .note-btn.dropdown-toggle:after {
+        content: none;
+    }
 
+</style>
 @endsection
 
 @section('main')
@@ -36,7 +42,6 @@
                             <label for="content" class="col-sm-2 col-form-label">內容</label>
                             <div class="col-sm-10">
                                 <textarea class="form-control" name="content" id="content" rows="5" required>
-                                    內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容內容
                                 </textarea>
                             </div>
                         </div>
@@ -55,5 +60,34 @@
 @endsection
 
 @section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-lite.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#content').summernote({
+            callbacks: {
+                onImageUpload: function(files) {
+                    console.log(typeof {{csrf_token()}});
+                    let url = "{{route('tool.image_upload')}}";
 
+                    let formData = new FormData();
+                    formData.append('_token', '{{csrf_token()}}' );
+                    formData.append('img', files[0]);
+
+                    fetch(
+                        url,{
+                            method:'POST',
+                            body: formData
+                        }
+                    ).then(function(res){
+                        return res.text()
+                    }).then(function(res){
+                        $('#content').summernote('insertImage', res)
+
+                    })
+                    // $summernote.summernote('insertNode', imgNode);
+                }
+            }
+        });
+    });
+</script>
 @endsection
