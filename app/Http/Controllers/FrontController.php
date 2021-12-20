@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
+use App\Models\Facility;
 use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -59,5 +60,10 @@ class FrontController extends Controller
 
         return '成功';
         //return redirect('/'); 只能走 get
+    }
+    public function facility()
+    {
+        $facilities = Facility::get();
+        return view('front.facility', compact('facilities'));
     }
 }
