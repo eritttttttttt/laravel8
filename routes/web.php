@@ -20,12 +20,12 @@ use Illuminate\Support\Facades\Route;
 
 
 // 前臺
-Route::get('/', [FrontController::class, 'index']);
+Route::get('/', [FrontController::class, 'index'])->name('index');
 
 
 Route::prefix('news')->group(function () {
-  Route::get('/', [FrontController::class, 'newsList']);
-  Route::get('/{id}', [FrontController::class, 'newsContent']);
+  Route::get('/', [FrontController::class, 'newsList'])->name('news.list');
+  Route::get('/{id}', [FrontController::class, 'newsContent'])->name('news.content');
 });
 
 

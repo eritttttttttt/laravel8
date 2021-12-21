@@ -508,22 +508,63 @@
                 </p>
                 <div class="form-group">
                     <label for="name">姓名</label>
-                    <input type="text" class="form-control" name="name" id="name">
+                    <input type="text" class="form-control
+                        @error('name') is-invalid @enderror
+                    "  name="name" id="name">
+                    @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="phone">電話</label>
-                    <input type="text" class="form-control"  name="phone" id="phone">
+                    <input type="text" class="form-control
+                        @error('phone') is-invalid @enderror
+                    " value="{{old('phone')}}"  name="phone" id="phone">
+                    @error('phone')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control"  name="email" id="email">
+                    <input type="email" class="form-control
+                        @error('email') is-invalid @enderror
+                    " value="{{old('email')}}"  name="email" id="email">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label class="form-check-label" for="content">表單</label>
-                    <textarea id="content" name="content" class="form-control"></textarea>
+                    <textarea id="content" name="content" class="form-control  @error('content') is-invalid @enderror">{{old('content')}}</textarea>
                 </div>
+                @error('content')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                {!! htmlFormSnippet() !!}
+                @error('g-recaptcha-response')
+                    <span class="text-danger" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
                 <small id="emailHelp" class="form-text text-muted">送出有驚人小禮物唷</small>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </form>
         </div>
         </div>

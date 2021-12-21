@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
 use App\Models\Contact;
 use App\Models\Facility;
-use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
 {
@@ -44,12 +45,24 @@ class FrontController extends Controller
 
     public function contact(Request $request)
     {
-        // $data = $request->all();
+        // $request->validate([
+        //     'name' => 'required|max:1',
+        // ]);
+        $validator = Validator::make(request()->all(), [
+            'name' => 'max:50',
+            'phone' => 'min:9|max:10',
+            'email' => 'email',
+            'content' => 'max:50',
+            'g-recaptcha-response' => 'recaptcha',
+        ]);
+        // // check if validator fails
+        if($validator->fails()) {
+            // $errors = $validator->errors();
+            return redirect('/')
+            ->withErrors($validator)
+            ->withInput();
+        }
 
-        // foreach $data as $item {
-
-        // }
-        
         Contact::create([
             "name" => $request->name, 
             "phone" => $request->phone, 
@@ -58,12 +71,12 @@ class FrontController extends Controller
         ]);
 
 
-        return '成功';
-        //return redirect('/'); 只能走 get
+        return redirect()->route('index');
+        // return redirect('/'); 只能走 get
     }
     public function facility()
     {
         $facilities = Facility::get();
-        return view('front.facility', compact('facilities'));
+        return view('front.facility.index', compact('facilities'));
     }
 }
